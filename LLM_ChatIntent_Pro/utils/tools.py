@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a1b5d523d0dcd415bd083ca93a2d39a96d37585565b3d991b8ca39d58728610f
-size 585
+import os
+
+def check_path(path):
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+def save_module(model, save_dir, module_name, addition_name='current'):
+    check_path(save_dir)
+    model_save_dir = os.path.join(save_dir, module_name)
+    check_path(model_save_dir)
+    model_save_path=os.path.join(model_save_dir, addition_name)
+    check_path(model_save_path)
+
+    model_to_save = model.module if hasattr(model, 'module') else model
+    model_to_save.save_pretrained(model_save_path)
+    print('saved {} at {}'.format(module_name, model_save_path))
+
+    

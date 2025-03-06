@@ -1,3 +1,10 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7c4faf5992afb9fc1ccfe383aab0620f0771bf263bd5ae3019d7a4632132a949
-size 275
+from abc import ABC, abstractmethod
+from langchain_core.documents import Document
+
+class BaseSearch(ABC):
+    """Interface for Document search."""
+
+    @abstractmethod
+    def base_search(self, query: str) -> list[Document]:
+        """search docs."""
+        pass

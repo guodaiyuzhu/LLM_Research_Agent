@@ -1,3 +1,12 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7519b826ba5e9d4c7c718c8d35276aac1311004ef2dbc76832f4234c0a61d923
-size 383
+from LLM_RAG_Master.loader.embedding.embedding_model import get_m3e_embeddings
+from MyMilvus import MyMilvus
+
+embedding = get_m3e_embeddings()
+
+vdb = MyMilvus(embedding_function=embedding, collection_name='sql_collection')
+
+query = 'quant是什么'
+
+docs = vdb.similarity_search(query=query, k=2)
+text_page_content = [d.page_content for d in docs]
+print(text_page_content)
