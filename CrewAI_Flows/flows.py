@@ -1,3 +1,24 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:699e5f8445a6283c9372eecfb2c04a2d4961c12bb729b20a3abf00c026a0d0c7
-size 804
+# 导入第三方库
+from crewai.flow.flow import Flow, listen, start
+from crews.marketAnalystCrew.marketAnalystCrew import marketAnalystCrew
+from crews.contentCreatorCrew.contentCreatorCrew import contentCreatorCrew
+
+
+class testFlow(Flow):
+
+    def __init__(self, model, inputData):
+        super().__init__()
+        self.model = model
+        self.inputData = inputData
+
+    @start()
+    def marketAnalystCrew(self):
+        result = marketAnalystCrew(self.model).crew().kickoff(inputs=self.inputData)
+        print("marketAnalystCrew result:", result)
+        return result
+    @listen(marketAnalystCrew)
+    def contentCreatorCrew(self):
+        result = contentCreatorCrew(self.model).crew().kickoff(inputs=self.inputData)
+        print("contentCreatorCrew result:", result)
+        return result
+

@@ -1,3 +1,21 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:26b5611ba72c48d2419decf65971f9015d23b4c9fea551e0fdf4f87b36a20893
-size 866
+-- FICC_DWODS
+create table LLM_LLM_SESSION_HISTORY(
+    USER_ID varchar(128),
+    SESSION_ID varchar2(128),
+    HISTORY_ID int,
+    ROLE_NAME varchar2(128),
+    MEMORY_HISTORY varchar2(4000),
+    CHAT_DATE varchar2(64),
+    CHAT_START_TIME varchar2(64),
+    CHAT_END_TIME varchar2(64)
+);
+
+CREATE INDEX IDX_LLM_LLM_SESSION_HISTORY_SESSION_ID ON LLM_LLM_SESSION_HISTORY(SESSION_ID);
+
+INSERT ALL
+    INTO LLM_LLM_SESSION_HISTORY(USER_ID,SESSION_ID,HISTORY_ID,ROLE_NAME,MEMORY_HISTORY,
+        CHAT_DATE,CHAT_START_TIME,CHAT_END_TIME) VALUES ('default', 'xk', 1, 'HUMAN', '你好', '','','')
+    INTO LLM_LLM_SESSION_HISTORY(USER_ID,SESSION_ID,HISTORY_ID,ROLE_NAME,MEMORY_HISTORY,
+        CHAT_DATE,CHAT_START_TIME,CHAT_END_TIME) VALUES ('default', 'xk', 2, 'AI', '你好，有什么需要可以帮助到您？', '','','')
+select 1 from dual;
+commit;

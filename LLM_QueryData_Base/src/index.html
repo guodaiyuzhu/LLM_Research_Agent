@@ -1,3 +1,72 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b6625f3a5074d67e17cf9a25541a8e027716c7f51c768a3bddab9d75445afd79
-size 2872
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LangChain WebSocket Example</title>
+    <script>
+        // 1 usages  KT101916
+        function convertJsonStringToJsonObject(str) {
+            try {
+                // 尝试解析字符串为JSON对象
+                const jsonObject = JSON.parse(str);
+                // 如果解析成功，返回解析后得到的对象
+                // return typeof jsonObject === 'object' && jsonObject!== null;
+                if (typeof jsonObject === 'object' && jsonObject !== null){
+                    return jsonObject;
+                }else{
+                    console.error('The input is not a valid JSON string.')
+                    return null;
+                }
+            } catch (e) {
+                // 如果解析时发生错误，例如输入的不是合法的JSON, 说明该字符串并非有效的JSON格式
+                return false;
+            }
+        }
+
+        // 创建WebSocket连接
+        // let ws = new WebSocket('ws://168.63.1.191:17130/ws');
+        // function sendMessage() {
+        //     let message = document.getElementById('message').value;
+        //     ws.send(message);
+        // }
+
+        // let response_str = '';
+        // ws.onmessage = function (event) {
+        //     let response = event.data;
+        //     response_str += response;
+        //     document.getElementById('outputs').innerHTML = response_str;response
+        //     if (response === '') {
+        //         response_str = response;
+        //     }
+        // };
+        let wsTest = new WebSocket('ws://localhost:17130/wsTest');
+
+        function sendMessageTest(){
+            let message_test = document.getElementById('message_test').value;
+            let message_test_json = {userId: "KFC", sessionId: "fengkuangxingqi4", contentType: "str", contentRef: message_test};
+            let jsonString = JSON.stringify(message_test_json);
+            wsTest.send(jsonString);
+        }
+
+        let response_str_test = ''
+        wsTest.onmessage = function(event){
+            let response = event.data;
+            let jsonObject = convertJsonStringToJsonObject(response)
+            if (typeof jsonObject.value==='string' && jsonObject.type==='text'){
+                response_str_test += jsonObject.value;
+                document.getElementById('output_test').innerHTML = response_str_test;
+            }
+            if (response===''){
+                response_str_test = response;
+            }
+        };
+    </script>
+</head>
+<body>
+<h1>Welcome to LangChain WebSocket Example</h1>
+
+<textarea id="message_test" placeholder="Type your message" cols="100" rows="4"></textarea><br>
+<button onclick="sendMessageTest()">Send Message</button><br>
+<div id="output_test"></div>
+</body>
+</html>

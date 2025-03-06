@@ -1,3 +1,5 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1c0463ff1ad934575dc2c0489e29391acd9cad20bfcdd9297cd07202eb088c75
-size 82
+crewai==0.70.1
+crewai-tools==0.12.1
+poetry==1.8.3
+fastapi==0.112.0
+uvicorn==0.30.6

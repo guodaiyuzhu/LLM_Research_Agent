@@ -1,3 +1,16 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0c7848160523e6097845c9e23e40b8a21899c6a52f1fa5a82e7b3ca02ba50498
-size 578
+# from langchain_community.chat_models import ChatOllama
+from langchain_ollama import ChatOllama
+class ChatOllamaModel:
+
+    @classmethod
+    def chatOllama(cls, model: str='qwen2:7b',base_url="http://localhost:11434",
+                   temperature=0,
+                   top_p=0.75,
+                   **kwargs):
+        llm = ChatOllama(model=model,
+                         base_url=base_url,
+                         temperature=temperature,
+                         top_p=top_p,
+                         **kwargs
+                         )
+        return llm

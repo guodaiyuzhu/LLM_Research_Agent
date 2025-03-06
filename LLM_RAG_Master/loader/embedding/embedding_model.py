@@ -1,3 +1,12 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:5ea06df38c4787ee462e9e7dba13a1d20e6bfdf76ffac1a5df9810d716507c4f
-size 613
+from langchain_community.embeddings import OllamaEmbeddings, HuggingFaceEmbeddings
+from LLM_RAG_Master.config.config import *
+
+def get_ollama_embeddings(model=OLLAMA_DEFAULT_MODEL, base_url=OLLAMA_BASE_URL, **kwargs):
+    embedding = OllamaEmbeddings(model=model, temperature=0, base_url=base_url, **kwargs)
+    return embedding
+
+def get_m3e_embeddings(model=EMBEDDING_MODEL, model_kwargs=None, **kwargs):
+    if model_kwargs is None:
+        model_kwargs = {'device': EMBEDDING_DEVICE}
+    embedding = HuggingFaceEmbeddings(model_name=model, model_kwargs=model_kwargs, **kwargs)
+    return embedding
