@@ -10,24 +10,24 @@ def query_from_mysql(sql, env):
 
     if env == 'AT':
         mysql_conn_json = {
-            'host': '168.63.1.78',
+            'host': '',
             'port': 3307,
-            'user': 'fice_readonly',
-            'password': 'WJ_uviX_6697',
+            'user': '',
+            'password': '',
         }
     elif env == 'SIT':
         mysql_conn_json = {
-            'host': '168.64.54.73',
+            'host': '',
             'port': 3306,
-            'user': 'fice_quant_readonly',
-            'password': 'Flzx3qcYsyhl9T_readonly',
+            'user': '',
+            'password': '',
         }
     else:
         mysql_conn_json = {
-            'host': '168.64.54.73',
+            'host': '',
             'port': 3306,
-            'user': 'fice_quant_readonly',
-            'password': 'Flzx3qcYsyhl9T_readonly',
+            'user': '',
+            'password': '',
         }
 
     db = pymysql.connect(
