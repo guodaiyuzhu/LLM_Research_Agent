@@ -43,18 +43,18 @@ OLLAMA_DEFAULT_MODEL = 'qwen2:7b'
 
 # GreenPlum connection information
 DEFAULT_GP_CONNECTION = {
-    "host": "168.63.25.66",
-    "port": "5432",
-    "database": "headdw",
-    "user": "ficcdw_gp",
-    "password": "RmLljY18ybzlyX1VzZXI="
+    "host": "",
+    "port": "",
+    "database": "",
+    "user": "",
+    "password": ""
 }
 
 # Oracle connection information
 DEFAULT_ORACLE_CONNECTION = {
-    "host": "168.63.18.146",
-    "port": "1521",
-    "database": "heads",
-    "user": "ficc_dwods",
-    "password": "TEhBS19scXBnXzMyNjQ="
+    "host": "",
+    "port": "",
+    "database": "",
+    "user": "",
+    "password": ""
 }
